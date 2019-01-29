@@ -2,20 +2,23 @@
 
 require_once("vendor/autoload.php");
 
-$app = new \Slim\Slim();
+use \Slim\Slim;
+use \HCode\Page; 
+
+$app = new Slim(); 
 
 $app->config('debug', true); // modo debug ligado
 
 $app->get('/', function() {
   
-  	$sql = new HCode\DB\Sql();
+ 	$page = new Page(); //adiciona o header na tela
 
- 	$result = $sql->select("SELECT * FROM tb_users");
-
- 	echo json_encode($result);
+ 	$page->setTpl("index"); // chama o arquivo html index e depois o destruct (de forma automática) chamando o footer
 
 });
 
 $app->run();
 
- ?>
+?>
+
+
